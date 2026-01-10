@@ -45,3 +45,5 @@ htmlcov/
 exports/
 *.csv
 *.json
+
+*.md
