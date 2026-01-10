@@ -6,6 +6,7 @@ Demonstrates all functionality with a test database.
 
 import sys
 import subprocess
+import tempfile
 from pathlib import Path
 import wiredtiger
 import shutil
@@ -17,7 +18,9 @@ def create_test_database():
     print("Creating Test Database")
     print("=" * 60)
     
-    test_db = Path("/tmp/demo_wt_db")
+    # Use tempfile for cross-platform compatibility
+    temp_dir = Path(tempfile.gettempdir())
+    test_db = temp_dir / "demo_wt_db"
     
     # Clean up if exists
     if test_db.exists():
@@ -104,7 +107,8 @@ def main():
     )
     
     # Test 3: Export to JSON
-    output_dir = Path("/tmp/test_output")
+    temp_dir = Path(tempfile.gettempdir())
+    output_dir = temp_dir / "test_output"
     output_dir.mkdir(exist_ok=True)
     
     run_command(

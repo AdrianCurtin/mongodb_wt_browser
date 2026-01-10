@@ -244,7 +244,6 @@ finally:
 
 ## Requirements
 
-- `pymongo>=4.6.0`: MongoDB Python driver
 - `wiredtiger>=11.2.0`: WiredTiger storage engine Python bindings
 - `click>=8.1.7`: Command-line interface creation kit
 
@@ -311,12 +310,27 @@ python cli.py export /backup/mongodb/data collection-users test_users.json --lim
 - The tool attempts to decode as UTF-8, falling back to hex representation
 - Consider the original MongoDB data types when interpreting exported data
 
+### Slow Table Info Command
+
+- The `info` command counts records by scanning the entire table
+- For large tables with millions of records, this can take a long time
+- Consider using `export --limit` to sample data instead of getting full counts
+- You can still export large tables efficiently; only the counting is slow
+
+## Performance Notes
+
+- **Record Counting**: The `info` command scans all records to count them, which can be slow for large tables
+- **Export Operations**: Export commands stream data efficiently and work well with large tables
+- **Use --limit Flag**: For large tables, use `--limit` to export a sample first before exporting everything
+- **Batch Exports**: The `export-all` command processes tables sequentially
+
 ## Limitations
 
 - **Read-Only**: The tool only reads data; it cannot modify WiredTiger databases
 - **Binary Data**: Complex binary data may not export cleanly to JSON/CSV
 - **Schema-Less**: WiredTiger stores raw key-value pairs without schema information
 - **MongoDB Specific**: Designed for MongoDB's use of WiredTiger; may not work with other WiredTiger applications
+- **Record Counting**: Counting records requires scanning the entire table
 
 ## Contributing
 

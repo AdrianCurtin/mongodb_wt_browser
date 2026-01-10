@@ -19,7 +19,6 @@ setup(
     url='https://github.com/AdrianCurtin/mongodb_wt_browser',
     py_modules=['wt_browser', 'cli'],
     install_requires=[
-        'pymongo>=4.6.0',
         'wiredtiger>=11.2.0',
         'click>=8.1.7',
     ],

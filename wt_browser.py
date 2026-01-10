@@ -4,8 +4,6 @@ MongoDB WiredTiger Browser
 A tool to open MongoDB WiredTiger backups and export tables.
 """
 
-import os
-import sys
 import json
 import csv
 from pathlib import Path
@@ -111,7 +109,9 @@ class WiredTigerBrowser:
             metadata_cursor.close()
             
             if info["exists"]:
-                # Count records
+                # Count records by iterating through cursor
+                # Note: This can be slow for large tables as it must scan all records.
+                # Consider using --limit flag in export commands for large tables.
                 try:
                     cursor = session.open_cursor(f"table:{table_name}", None, None)
                     count = 0

@@ -54,7 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Dependencies
 - Python 3.8+
-- pymongo >= 4.6.0
 - wiredtiger >= 11.2.0
 - click >= 8.1.7
 
