@@ -47,3 +47,5 @@ exports/
 *.json
 
 *.md
+/restore_data
+*.gz
